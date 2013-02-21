@@ -13,6 +13,7 @@
 {
     IBOutlet UITextField *serviceTextField;
     IBOutlet UITextView *detailsTextField;
+    IBOutlet UIActivityIndicatorView *progressIndicator;
 }
 
 @property (strong, nonatomic) NavSolService *detailItem;

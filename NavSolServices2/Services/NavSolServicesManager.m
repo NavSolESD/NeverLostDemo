@@ -45,7 +45,13 @@ static NavSolServicesManager *myInstance;
     NSString *data = nil;
     if([service.RESTmethod isEqualToString:@"POST"] || [service.RESTmethod isEqualToString:@"PUT"])
     {
-        data = service.data;
+        // i have no idea if any of this works
+        NSOutputStream *stream = [[NSOutputStream alloc] initToMemory];
+        [stream open];
+        [NSJSONSerialization writeJSONObject:service.data toStream:stream options:0 error:NULL];
+
+        data = [stream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+        [stream close];
     }
 
     [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:data bytes:nil];
@@ -90,7 +96,7 @@ static NavSolServicesManager *myInstance;
     }
     else
     {
-        // the connection failed. Return an error message
+        // the connection failed.
 
     }
 }

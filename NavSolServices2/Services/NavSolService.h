@@ -12,7 +12,7 @@
 @interface NavSolService : NSObject
 {
     NSString    *relativeUrl;
-    NSString    *data;
+    id          data;
     NSString    *RESTmethod;
     BOOL        isSecure;
     NSString    *name;
@@ -24,7 +24,7 @@
 @property (nonatomic) BOOL isSecure;
 @property (nonatomic, strong) NSString* name;
 
-- (id) initWithUrl:(NSString*)url withData:(NSString*)dataString isSecure:(BOOL)security RESTmethod:(NSString*)method withName:(NSString*)name;
+- (id) initWithUrl:(NSString*)url withData:(id)dataString isSecure:(BOOL)security RESTmethod:(NSString*)method withName:(NSString*)name;
 - (NSURL*) buildUrl;
 
 @end

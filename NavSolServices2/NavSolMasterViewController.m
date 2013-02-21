@@ -38,12 +38,20 @@
 
     // creating parallel arrays for services and operations
     NSArray *serviceNames = [[NSArray alloc] initWithObjects:
-                             @"TokenManagement",
+                             @"Security/TokenManagement",
+                             @"Security/Registration",
+                             @"Security/PasswordManagement",
+                             @"Security/Authentication",
                              @"Search/Pois",
+                             @"Search/Events",
+                             @"Search/PopularLocations",
+                             @"TripPlanning/CodeManagement",
+                             @"TripPlanning/TripManagement",
+                             @"TripPlanning/PoiManagement",
                              nil];
 
     NSArray *serviceOperations = [[NSArray alloc] initWithObjects:
-                                  [[NSArray alloc] initWithObjects:
+                                  [[NSArray alloc] initWithObjects: // Security/TokenManagement
                                    [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/createtoken"
                                                              withData:[NSString stringWithFormat:@"?tenantGuid=%@&applicationGuid=%@",
                                                                        [NavSolServicesManager instance].tenantGuid, [NavSolServicesManager instance].applicationGuid ]
@@ -56,7 +64,16 @@
                                                            RESTmethod:@"GET"
                                                              withName:@"GetTokenByGuid"],
                                    nil],
-                                  [[NSArray alloc] initWithObjects:
+                                  [[NSArray alloc] initWithObjects: // Security/Registration
+                                   [[NavSolService alloc] initWithUrl:@"/security/registration.svc/register"
+                                                             withData:[NSDictionary
+                                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"username", @"password", @"emailAddress", nil]
+                                                                       forKeys:[NSArray arrayWithObjects:@"exampleUser", @"examplePassword", @"example@sxsw.com", nil]]
+                                                             isSecure:false
+                                                           RESTmethod:@"PUT"
+                                                             withName:@"CreateToken"],
+                                   nil],
+                                  [[NSArray alloc] initWithObjects: // Search/Pois
                                    [[NavSolService alloc] initWithUrl:@"/search/pois.svc/"
                                                              withData:@"?phrase=starbucks%20dallas,tx"
                                                              isSecure:false
@@ -68,7 +85,7 @@
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAllSearchCategories"],
                                    [[NavSolService alloc] initWithUrl:@"/search/pois.svc/getairport"
-                                                             withData:@"?airportCode=LAX"
+                                                             withData:@"?code=LAX"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAirport"],

@@ -21,7 +21,10 @@
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateTextView) name:@"serviceCallFinished" object:NULL];
+        
+        detailsTextField.text = @"";
+        [progressIndicator startAnimating];
+        
         [NavSolServicesManager CallService:_detailItem];
         // Update the view.
         [self configureView];
@@ -41,13 +44,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateTextView) name:@"serviceCallFinished" object:NULL];
     
+    [self configureView];
 }
 
 - (void) populateTextView
 {
+    [progressIndicator stopAnimating];
     NSError *e;
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:[[NavSolServicesManager instance] recievedData] options:NSJSONReadingMutableContainers error:&e];
 
@@ -57,9 +61,7 @@
     } else {
         detailsTextField.text = [NSString stringWithFormat:@"%@", jsonData];
     }
-
 }
-
 
 - (void)didReceiveMemoryWarning
 {

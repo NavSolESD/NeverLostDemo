@@ -15,13 +15,13 @@
 @synthesize RESTmethod;
 @synthesize name;
 
-- (id) initWithUrl:(NSString *)url withData:(NSString *)dataString isSecure:(BOOL)security RESTmethod:(NSString*)method withName:(NSString*)serviceName
+- (id) initWithUrl:(NSString *)url withData:(id)dataString isSecure:(BOOL)security RESTmethod:(NSString*)method withName:(NSString*)serviceName
 {
     self = [super init];
     if (self)
     {
-        relativeUrl = [url copy];
-        data = [dataString copy];
+        relativeUrl = url;
+        data = dataString;
         isSecure = security;
         RESTmethod = method;
         name = serviceName;
