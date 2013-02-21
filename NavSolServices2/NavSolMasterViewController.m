@@ -21,7 +21,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        self.title = NSLocalizedString(@"Navigation Solutions", @"Navigation Solutions");
     }
     return self;
 }
@@ -30,10 +30,51 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+//    self.navigationItem.rightBarButtonItem = addButton;
+    baseServicesUrl = [NavSolServicesManager instance].baseServicesUrl;
+
+    // creating parallel arrays for services and operations
+    NSArray *serviceNames = [[NSArray alloc] initWithObjects:
+                             @"TokenManagement",
+                             @"Search/Pois",
+                             nil];
+
+    NSArray *serviceOperations = [[NSArray alloc] initWithObjects:
+                                  [[NSArray alloc] initWithObjects:
+                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/createtoken"
+                                                             withData:[NSString stringWithFormat:@"?tenantGuid=%@&applicationGuid=%@",
+                                                                       [NavSolServicesManager instance].tenantGuid, [NavSolServicesManager instance].applicationGuid ]
+                                                             isSecure:false
+                                                           RESTmethod:@"GET"
+                                                             withName:@"CreateToken"],
+                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/gettokenbyguid"
+                                                             withData:[NSString stringWithFormat:@"?tokenguid=%@", [NavSolServicesManager instance].tokenGuid]
+                                                             isSecure:false
+                                                           RESTmethod:@"GET"
+                                                             withName:@"GetTokenByGuid"],
+                                   nil],
+                                  [[NSArray alloc] initWithObjects:
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/"
+                                                             withData:@"?phrase=starbucks%20dallas,tx"
+                                                             isSecure:false
+                                                           RESTmethod:@"GET"
+                                                             withName:@"Search"],
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/getallsearchcategories"
+                                                             withData:NULL
+                                                             isSecure:false
+                                                           RESTmethod:@"GET"
+                                                             withName:@"GetAllSearchCategories"],
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/getairport"
+                                                             withData:@"?airportCode=LAX"
+                                                             isSecure:false
+                                                           RESTmethod:@"GET"
+                                                             withName:@"GetAirport"],
+                                   nil],
+                                  nil];
+    services = [[NSDictionary alloc] initWithObjects:serviceOperations forKeys:serviceNames];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,26 +83,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [services count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return [[services objectForKey:[[services allKeys] objectAtIndex:section]] count];
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *serviceName = [[services allKeys] objectAtIndex:section];
+    return serviceName;
 }
 
 // Customize the appearance of table view cells.
@@ -72,54 +109,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
 
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSArray *service = [services objectForKey:[[services allKeys] objectAtIndex:indexPath.section]];
+    cell.textLabel.text = [[service objectAtIndex:indexPath.row] name];
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.detailViewController) {
         self.detailViewController = [[NavSolDetailViewController alloc] initWithNibName:@"NavSolDetailViewController" bundle:nil];
     }
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
+    NSArray *service = [services objectForKey:[[services allKeys] objectAtIndex:indexPath.section]];
+    NavSolService *operation = [service objectAtIndex:indexPath.row];
+    
+    [self.detailViewController setDetailItem: operation];
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 

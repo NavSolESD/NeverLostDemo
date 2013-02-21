@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavSolService.h"
 
 @interface NavSolDetailViewController : UIViewController
+{
+    IBOutlet UITextField *serviceTextField;
+    IBOutlet UITextView *detailsTextField;
+}
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) NavSolService *detailItem;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
+- (void) populateTextView;
 @end

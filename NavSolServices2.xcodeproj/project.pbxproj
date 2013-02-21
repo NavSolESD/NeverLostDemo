@@ -20,6 +20,8 @@
 		1E3591CC16D6BFF900F50541 /* NavSolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3591CB16D6BFF900F50541 /* NavSolDetailViewController.m */; };
 		1E3591CF16D6BFF900F50541 /* NavSolMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E3591CD16D6BFF900F50541 /* NavSolMasterViewController.xib */; };
 		1E3591D216D6BFF900F50541 /* NavSolDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E3591D016D6BFF900F50541 /* NavSolDetailViewController.xib */; };
+		1E3591E316D6C23800F50541 /* NavSolService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3591E216D6C23800F50541 /* NavSolService.m */; };
+		1E3591E616D6C2DA00F50541 /* NavSolServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3591E516D6C2DA00F50541 /* NavSolServicesManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,10 @@
 		1E3591CB16D6BFF900F50541 /* NavSolDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavSolDetailViewController.m; sourceTree = "<group>"; };
 		1E3591CE16D6BFF900F50541 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NavSolMasterViewController.xib; sourceTree = "<group>"; };
 		1E3591D116D6BFF900F50541 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NavSolDetailViewController.xib; sourceTree = "<group>"; };
+		1E3591E116D6C23800F50541 /* NavSolService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavSolService.h; path = Services/NavSolService.h; sourceTree = "<group>"; };
+		1E3591E216D6C23800F50541 /* NavSolService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavSolService.m; path = Services/NavSolService.m; sourceTree = "<group>"; };
+		1E3591E416D6C2DA00F50541 /* NavSolServicesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavSolServicesManager.h; path = Services/NavSolServicesManager.h; sourceTree = "<group>"; };
+		1E3591E516D6C2DA00F50541 /* NavSolServicesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavSolServicesManager.m; path = Services/NavSolServicesManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 		1E3591B616D6BFF900F50541 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E3591E016D6C21E00F50541 /* Services */,
 				1E3591B716D6BFF900F50541 /* NavSolServices2-Info.plist */,
 				1E3591B816D6BFF900F50541 /* InfoPlist.strings */,
 				1E3591BB16D6BFF900F50541 /* main.m */,
@@ -113,6 +120,17 @@
 				1E3591C516D6BFF900F50541 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1E3591E016D6C21E00F50541 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1E3591E116D6C23800F50541 /* NavSolService.h */,
+				1E3591E216D6C23800F50541 /* NavSolService.m */,
+				1E3591E416D6C2DA00F50541 /* NavSolServicesManager.h */,
+				1E3591E516D6C2DA00F50541 /* NavSolServicesManager.m */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +205,8 @@
 				1E3591C016D6BFF900F50541 /* NavSolAppDelegate.m in Sources */,
 				1E3591C916D6BFF900F50541 /* NavSolMasterViewController.m in Sources */,
 				1E3591CC16D6BFF900F50541 /* NavSolDetailViewController.m in Sources */,
+				1E3591E316D6C23800F50541 /* NavSolService.m in Sources */,
+				1E3591E616D6C2DA00F50541 /* NavSolServicesManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

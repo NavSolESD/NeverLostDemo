@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavSolService.h"
+#import "NavSolServicesManager.h"
 
 @class NavSolDetailViewController;
 
 @interface NavSolMasterViewController : UITableViewController
+{
+    NSDictionary    *services;
+    NSString        *baseServicesUrl;
+}
 
 @property (strong, nonatomic) NavSolDetailViewController *detailViewController;
 
