@@ -30,7 +30,7 @@
 
 // class (static) methods
 + (void) CallService:(NavSolService*)service;
-+ (void) CallService:(NSURL*)url method:(NSString*)method_type data:(NSString*)xml_data bytes:(NSArray*)bytes_array;
++ (void) CallService:(NSURL*)url method:(NSString*)method_type data:(NSString*)xml_data bytes:(NSData*)bytes_array;
 // singleton access methods
 + (NavSolServicesManager *)instance;
 

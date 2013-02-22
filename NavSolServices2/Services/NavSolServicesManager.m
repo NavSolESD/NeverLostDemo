@@ -20,7 +20,7 @@
     self = [super init];
     if (self)
     {
-        baseServicesUrl = @"dev-services.navsol.net";
+        baseServicesUrl = @"wb-jh-4s2dvm1/services";
         tenantGuid = @"9F4E1CAD-83F0-44F3-AF33-398F703768A6";
         applicationGuid = @"141b2bdc-2840-4f66-a051-89bdb027958d";
     }
@@ -42,19 +42,16 @@ static NavSolServicesManager *myInstance;
 // class methods
 + (void) CallService:(NavSolService *)service
 {
-    NSString *data = nil;
     if([service.RESTmethod isEqualToString:@"POST"] || [service.RESTmethod isEqualToString:@"PUT"])
     {
-        // i have no idea if any of this works
-        NSOutputStream *stream = [[NSOutputStream alloc] initToMemory];
-        [stream open];
-        [NSJSONSerialization writeJSONObject:service.data toStream:stream options:0 error:NULL];
-
-        data = [stream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
-        [stream close];
+        // serialize our data object to JSON
+        NSData* data = [NSJSONSerialization dataWithJSONObject:service.data options:0 error:nil];
+        [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:nil bytes:data];
     }
-
-    [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:data bytes:nil];
+    else
+    {
+        [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:nil bytes:nil];
+    }    
 }
 
 + (void) CallService:(NSURL*)url method:(NSString *)method_type data:(NSString *)json_data bytes:(NSData *)bytes_array
@@ -84,11 +81,14 @@ static NavSolServicesManager *myInstance;
         {
             bytes_array = [json_data dataUsingEncoding:NSUTF8StringEncoding];
         }
+        
         [request setHTTPBody:bytes_array];
         [request setValue:[NSString stringWithFormat: @"%d", [bytes_array length]] forHTTPHeaderField:@"content-length"];
     }
 
     // start a connection
+    NSLog(@"Calling service with url: %@", [url absoluteString]);
+    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:[NavSolServicesManager instance]];
     if(connection)
     {
@@ -134,14 +134,16 @@ static NavSolServicesManager *myInstance;
 {
     NSLog(@"success");
 
-    if( [[[connection.currentRequest URL] absoluteString] compare:@"createtoken" options:NSCaseInsensitiveSearch]){
+    NSString *requestUrl = [[connection.currentRequest URL] absoluteString];
+    NSRange range = [requestUrl rangeOfString:@"createtoken" options:NSCaseInsensitiveSearch];
+    if( range.location != NSNotFound){
         NSError *e = NULL;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:recievedData options:NSJSONReadingMutableLeaves error:&e];
         if(e) {
             NSLog(@"error: %@", e);
         } else {
-            NSLog(@"%@", [[json objectForKey:@"Data"] objectForKey:@"Guid"]);
-            tokenGuid = [[json objectForKey:@"Data"] objectForKey:@"Guid"];
+            NSLog(@"%@", [json objectForKey:@"Data"]);
+            tokenGuid = [json objectForKey:@"Data"];
         }
     }
     NSLog(@"urlContainsCreateToken?: %d", [[[connection.currentRequest URL] absoluteString] compare:@"createtoken" options:NSCaseInsensitiveSearch] );
