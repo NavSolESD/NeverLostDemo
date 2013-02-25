@@ -25,14 +25,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E3591AB16D6BFF900F50541 /* NavSolServices2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavSolServices2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E3591AB16D6BFF900F50541 /* NavSolServices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavSolServices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E3591AF16D6BFF900F50541 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1E3591B116D6BFF900F50541 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E3591B316D6BFF900F50541 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1E3591B716D6BFF900F50541 /* NavSolServices2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NavSolServices2-Info.plist"; sourceTree = "<group>"; };
+		1E3591B716D6BFF900F50541 /* NavSolServices-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NavSolServices-Info.plist"; sourceTree = "<group>"; };
 		1E3591B916D6BFF900F50541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1E3591BB16D6BFF900F50541 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1E3591BD16D6BFF900F50541 /* NavSolServices2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NavSolServices2-Prefix.pch"; sourceTree = "<group>"; };
+		1E3591BD16D6BFF900F50541 /* NavSolServices-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NavSolServices-Prefix.pch"; sourceTree = "<group>"; };
 		1E3591BE16D6BFF900F50541 /* NavSolAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavSolAppDelegate.h; sourceTree = "<group>"; };
 		1E3591BF16D6BFF900F50541 /* NavSolAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavSolAppDelegate.m; sourceTree = "<group>"; };
 		1E3591C116D6BFF900F50541 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		1E3591A016D6BFF900F50541 = {
 			isa = PBXGroup;
 			children = (
-				1E3591B516D6BFF900F50541 /* NavSolServices2 */,
+				1E3591B516D6BFF900F50541 /* NavSolServices */,
 				1E3591AE16D6BFF900F50541 /* Frameworks */,
 				1E3591AC16D6BFF900F50541 /* Products */,
 			);
@@ -76,7 +76,7 @@
 		1E3591AC16D6BFF900F50541 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E3591AB16D6BFF900F50541 /* NavSolServices2.app */,
+				1E3591AB16D6BFF900F50541 /* NavSolServices.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,7 +91,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1E3591B516D6BFF900F50541 /* NavSolServices2 */ = {
+		1E3591B516D6BFF900F50541 /* NavSolServices */ = {
 			isa = PBXGroup;
 			children = (
 				1E3591BE16D6BFF900F50541 /* NavSolAppDelegate.h */,
@@ -104,6 +104,7 @@
 				1E3591D016D6BFF900F50541 /* NavSolDetailViewController.xib */,
 				1E3591B616D6BFF900F50541 /* Supporting Files */,
 			);
+			name = NavSolServices;
 			path = NavSolServices2;
 			sourceTree = "<group>";
 		};
@@ -111,10 +112,10 @@
 			isa = PBXGroup;
 			children = (
 				1E3591E016D6C21E00F50541 /* Services */,
-				1E3591B716D6BFF900F50541 /* NavSolServices2-Info.plist */,
+				1E3591B716D6BFF900F50541 /* NavSolServices-Info.plist */,
 				1E3591B816D6BFF900F50541 /* InfoPlist.strings */,
 				1E3591BB16D6BFF900F50541 /* main.m */,
-				1E3591BD16D6BFF900F50541 /* NavSolServices2-Prefix.pch */,
+				1E3591BD16D6BFF900F50541 /* NavSolServices-Prefix.pch */,
 				1E3591C116D6BFF900F50541 /* Default.png */,
 				1E3591C316D6BFF900F50541 /* Default@2x.png */,
 				1E3591C516D6BFF900F50541 /* Default-568h@2x.png */,
@@ -136,9 +137,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1E3591AA16D6BFF900F50541 /* NavSolServices2 */ = {
+		1E3591AA16D6BFF900F50541 /* NavSolServices */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E3591D516D6BFF900F50541 /* Build configuration list for PBXNativeTarget "NavSolServices2" */;
+			buildConfigurationList = 1E3591D516D6BFF900F50541 /* Build configuration list for PBXNativeTarget "NavSolServices" */;
 			buildPhases = (
 				1E3591A716D6BFF900F50541 /* Sources */,
 				1E3591A816D6BFF900F50541 /* Frameworks */,
@@ -148,9 +149,9 @@
 			);
 			dependencies = (
 			);
-			name = NavSolServices2;
+			name = NavSolServices;
 			productName = NavSolServices2;
-			productReference = 1E3591AB16D6BFF900F50541 /* NavSolServices2.app */;
+			productReference = 1E3591AB16D6BFF900F50541 /* NavSolServices.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +164,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Navigation Solutions";
 			};
-			buildConfigurationList = 1E3591A516D6BFF900F50541 /* Build configuration list for PBXProject "NavSolServices2" */;
+			buildConfigurationList = 1E3591A516D6BFF900F50541 /* Build configuration list for PBXProject "NavSolServices" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -175,7 +176,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1E3591AA16D6BFF900F50541 /* NavSolServices2 */,
+				1E3591AA16D6BFF900F50541 /* NavSolServices */,
 			);
 		};
 /* End PBXProject section */
@@ -294,9 +295,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices2-Prefix.pch";
-				INFOPLIST_FILE = "NavSolServices2/NavSolServices2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices-Prefix.pch";
+				INFOPLIST_FILE = "NavSolServices2/NavSolServices-Info.plist";
+				PRODUCT_NAME = NavSolServices;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -305,9 +306,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices2-Prefix.pch";
-				INFOPLIST_FILE = "NavSolServices2/NavSolServices2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices-Prefix.pch";
+				INFOPLIST_FILE = "NavSolServices2/NavSolServices-Info.plist";
+				PRODUCT_NAME = NavSolServices;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -315,7 +316,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E3591A516D6BFF900F50541 /* Build configuration list for PBXProject "NavSolServices2" */ = {
+		1E3591A516D6BFF900F50541 /* Build configuration list for PBXProject "NavSolServices" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E3591D316D6BFF900F50541 /* Debug */,
@@ -324,13 +325,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E3591D516D6BFF900F50541 /* Build configuration list for PBXNativeTarget "NavSolServices2" */ = {
+		1E3591D516D6BFF900F50541 /* Build configuration list for PBXNativeTarget "NavSolServices" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E3591D616D6BFF900F50541 /* Debug */,
 				1E3591D716D6BFF900F50541 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
