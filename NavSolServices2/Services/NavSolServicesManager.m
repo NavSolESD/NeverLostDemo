@@ -20,7 +20,7 @@
     self = [super init];
     if (self)
     {
-        baseServicesUrl = @"wb-jh-4s2dvm1/services";
+        baseServicesUrl = @"dev-services.navsol.net";
         tenantGuid = @"9F4E1CAD-83F0-44F3-AF33-398F703768A6";
         applicationGuid = @"141b2bdc-2840-4f66-a051-89bdb027958d";
     }

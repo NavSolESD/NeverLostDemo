@@ -7,7 +7,6 @@
 //
 
 #import "NavSolMasterViewController.h"
-
 #import "NavSolDetailViewController.h"
 
 @interface NavSolMasterViewController () {
@@ -30,10 +29,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-//    self.navigationItem.rightBarButtonItem = addButton;
     baseServicesUrl = [NavSolServicesManager instance].baseServicesUrl;
 
     // creating parallel arrays for services and operations
@@ -48,6 +43,7 @@
                              @"TripPlanning/CodeManagement",
                              @"TripPlanning/TripManagement",
                              @"TripPlanning/PoiManagement",
+                             @"Member/MemberProperty",
                              nil];
 
     // a 2d array of all the operations, ordered by service 
@@ -131,7 +127,7 @@
                                                              withData:@"?eventId=13920"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
-                                                             withName:@"GetEventParameters"],
+                                                             withName:@"GetEventData"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Search/PopularLocations
                                    [[NavSolService alloc] initWithUrl:@"/search/popularlocations.svc/"
@@ -199,7 +195,29 @@
                                                                                                   forKeys:[NSArray arrayWithObjects:@"23534623", nil] ]
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
-                                                             withName:@"RemovePoiFromTrip"],
+                                                             withName:@"AddPoiToTrip"],
+                                   nil],
+                                  [[NSArray alloc] initWithObjects: // Member/MemberProperty
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/get"
+                                                             withData:@"?"
+                                                             isSecure:true
+                                                           RESTmethod:@"GET"
+                                                             withName:@"Get"],
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/set"
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"John Smith", nil] forKeys:[NSArray arrayWithObjects:@"Name", nil]]
+                                                             isSecure:true
+                                                           RESTmethod:@"POST"
+                                                             withName:@"Set"],
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/remove"
+                                                             withData:@"?"
+                                                             isSecure:true
+                                                           RESTmethod:@"DELETE"
+                                                             withName:@"Remove"],
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/getall"
+                                                             withData:@""
+                                                             isSecure:true
+                                                           RESTmethod:@"GET"
+                                                             withName:@"GetAll"],
                                    nil],
                                   nil];
     services = [[NSDictionary alloc] initWithObjects:serviceOperations forKeys:serviceNames];

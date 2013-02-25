@@ -11,14 +11,13 @@
 
 @interface NavSolDetailViewController : UIViewController
 {
-    IBOutlet UITextField *serviceTextField;
     IBOutlet UITextView *detailsTextField;
     IBOutlet UIActivityIndicatorView *progressIndicator;
+    IBOutlet UITextView *serviceTextField;
 }
 
 @property (strong, nonatomic) NavSolService *detailItem;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
-
 - (void) populateTextView;
+- (IBAction)goButtonPushed:(UIButton *)sender;
 @end

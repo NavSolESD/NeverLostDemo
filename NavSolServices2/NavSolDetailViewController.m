@@ -20,23 +20,27 @@
 {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-
-        
-        detailsTextField.text = @"";
-        [progressIndicator startAnimating];
-        
-        [NavSolServicesManager CallService:_detailItem];
-        // Update the view.
-        [self configureView];
     }
+    
+    // Update the view.
+    [self configureView];
 }
 
 - (void)configureView
 {
     // Update the user interface for the detail item.
 
-    if (self.detailItem) {
-        serviceTextField.text = [_detailItem name];
+    if (self.detailItem && detailsTextField) {
+        serviceTextField.text = [[_detailItem buildUrl] path];
+        if([[_detailItem RESTmethod] isEqualToString:@"POST"] || [[_detailItem RESTmethod] isEqualToString:@"PUT"])
+        {
+            NSData *tempData = [NSJSONSerialization dataWithJSONObject:[_detailItem data] options:NSJSONWritingPrettyPrinted error:NULL];
+            detailsTextField.text = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
+        }
+        else
+        {
+            detailsTextField.text = [_detailItem data];
+        }
     }
 }
 
@@ -60,6 +64,7 @@
         detailsTextField.text = [[NSString alloc] initWithData:[[NavSolServicesManager instance] recievedData] encoding:NSUTF8StringEncoding];
     } else {
         detailsTextField.text = [NSString stringWithFormat:@"%@", jsonData];
+        serviceTextField.text = [_detailItem name];
     }
 }
 
@@ -78,4 +83,8 @@
     return self;
 }
 							
+- (IBAction)goButtonPushed:(UIButton *)sender {
+    [progressIndicator startAnimating];
+    [NavSolServicesManager CallService:_detailItem];
+}
 @end
