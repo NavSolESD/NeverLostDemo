@@ -104,9 +104,8 @@
 				1E3591D016D6BFF900F50541 /* NavSolDetailViewController.xib */,
 				1E3591B616D6BFF900F50541 /* Supporting Files */,
 			);
-			name = NavSolServices;
-			path = "/Users/_ESDAdmin/Documents/NavSol Services/NavSolServices/NavSolServices";
-			sourceTree = "<absolute>";
+			path = NavSolServices;
+			sourceTree = "<group>";
 		};
 		1E3591B616D6BFF900F50541 /* Supporting Files */ = {
 			isa = PBXGroup;
