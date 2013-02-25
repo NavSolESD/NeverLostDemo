@@ -42,14 +42,17 @@ static NavSolServicesManager *myInstance;
 // class methods
 + (void) CallService:(NavSolService *)service
 {
+    // if this is a POST or PUT, we need to serialize the data
     if([service.RESTmethod isEqualToString:@"POST"] || [service.RESTmethod isEqualToString:@"PUT"])
     {
         // serialize our data object to JSON
         NSData* data = [NSJSONSerialization dataWithJSONObject:service.data options:0 error:nil];
+
         [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:nil bytes:data];
     }
     else
     {
+        // this a is a GET or DELETE call - the data is included in the url query string already
         [NavSolServicesManager CallService:[service buildUrl] method:service.RESTmethod data:nil bytes:nil];
     }    
 }
@@ -88,28 +91,13 @@ static NavSolServicesManager *myInstance;
 
     // start a connection
     NSLog(@"Calling service with url: %@", [url absoluteString]);
-    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:[NavSolServicesManager instance]];
-    if(connection)
+    
+    if(connection) // the connection successfully opened
     {
+        // build a data object to recieve the response
         [NavSolServicesManager instance].recievedData = [NSMutableData data];
     }
-    else
-    {
-        // the connection failed.
-
-    }
-}
-
-// instance methods
-- (void) GetToken
-{
-    // register for the notification when this ends
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateTextView) name:@"serviceCallFinished" object:NULL];
-
-    NSURL *getTokenUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@?tenantGuid=%@&applicationGuid=%@", @"http://", baseServicesUrl, @"/tokenmanagement/createtoken", tenantGuid, applicationGuid ]];
-
-    [NavSolServicesManager CallService:getTokenUrl method:@"GET" data:NULL bytes:NULL];
 }
 
 // - NSURLConnection Delegate methods
@@ -132,22 +120,51 @@ static NavSolServicesManager *myInstance;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"success");
+    NSLog(@"Success");
 
     NSString *requestUrl = [[connection.currentRequest URL] absoluteString];
-    NSRange range = [requestUrl rangeOfString:@"createtoken" options:NSCaseInsensitiveSearch];
-    if( range.location != NSNotFound){
+    // check the url to see if it was a "CreateToken" call or a "SignIn" call
+    NSRange createTokenRange = [requestUrl rangeOfString:@"createtoken" options:NSCaseInsensitiveSearch];
+    NSRange signinRange = [requestUrl rangeOfString:@"signin" options:NSCaseInsensitiveSearch];
+    // if it was a "CreateToken" call, grab the token guid from the response and assign it to the instance's
+    // tokenGuid
+    if( createTokenRange.location != NSNotFound){
+        // attempt to deserialize the response data
         NSError *e = NULL;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:recievedData options:NSJSONReadingMutableLeaves error:&e];
-        if(e) {
+
+        if(e)
+        {
+            // deserialize error - this most likely means a 500 error - either the server is down or there is a permissions error
             NSLog(@"error: %@", e);
-        } else {
+        }
+        else
+        {
+            // otherwise, grab the token guid data
             NSLog(@"%@", [json objectForKey:@"Data"]);
             tokenGuid = [json objectForKey:@"Data"];
         }
     }
-    NSLog(@"urlContainsCreateToken?: %d", [[[connection.currentRequest URL] absoluteString] compare:@"createtoken" options:NSCaseInsensitiveSearch] );
+    else if (signinRange.location != NSNotFound) // check if it was a "SignIn" call
+    {
+        // attempt to deserialize the response data
+        NSError *e = NULL;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:recievedData options:NSJSONReadingMutableLeaves error:&e];
 
+        if(e)
+        {
+            // deserialize error - this most likely means a 500 error - either the server is down or there is a permissions error
+            NSLog(@"error: %@", e);
+        }
+        else
+        {
+            // otherwise grab the token guid data
+            NSLog(@"%@", [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"]);
+            tokenGuid = [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"];
+        }
+    }
+
+    // post a notification for the caller to consume
     [[NSNotificationCenter defaultCenter] postNotificationName:@"serviceCallFinished" object:NULL];
 }
 

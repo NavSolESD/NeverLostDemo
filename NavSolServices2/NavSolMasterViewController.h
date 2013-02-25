@@ -15,6 +15,7 @@
 @interface NavSolMasterViewController : UITableViewController
 {
     NSDictionary    *services;
+    NSArray         *serviceNames;
     NSString        *baseServicesUrl;
 }
 

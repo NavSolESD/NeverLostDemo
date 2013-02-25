@@ -25,10 +25,8 @@
 @property (nonatomic, strong) NSString* tenantGuid;
 @property (nonatomic, strong) NSString* applicationGuid;
 @property (nonatomic, strong) NSString* baseServicesUrl;
-// instance methods
-- (void)GetToken;
 
-// class (static) methods
+// class methods
 + (void) CallService:(NavSolService*)service;
 + (void) CallService:(NSURL*)url method:(NSString*)method_type data:(NSString*)xml_data bytes:(NSData*)bytes_array;
 // singleton access methods

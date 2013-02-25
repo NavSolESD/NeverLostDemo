@@ -33,13 +33,18 @@
 -(NSURL*) buildUrl
 {
     NSURL *url = NULL;
-    if ([RESTmethod isEqualToString:@"POST"] || [RESTmethod isEqualToString:@"PUT"]) {
+    if ([RESTmethod isEqualToString:@"POST"] || [RESTmethod isEqualToString:@"PUT"])
+    {
+        // POST/PUT doesn't include the data in the query string
         url = [[NSURL alloc] initWithString:
                [NSString stringWithFormat:@"%@%@%@",
                 isSecure ? @"https://" : @"http://",
                 [NavSolServicesManager instance].baseServicesUrl,
                 relativeUrl]];
-    } else {
+    }
+    else
+    {
+        // GET/DELETE includes the data in the query string
         url = [[NSURL alloc] initWithString:
                [NSString stringWithFormat:@"%@%@%@%@",
                 isSecure ? @"https://" : @"http://",

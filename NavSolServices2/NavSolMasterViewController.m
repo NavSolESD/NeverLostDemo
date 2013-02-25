@@ -32,7 +32,7 @@
     baseServicesUrl = [NavSolServicesManager instance].baseServicesUrl;
 
     // creating parallel arrays for services and operations
-    NSArray *serviceNames = [[NSArray alloc] initWithObjects:
+    serviceNames = [[NSArray alloc] initWithObjects:
                              @"Security/TokenManagement",
                              @"Security/Registration",
                              @"Security/PasswordManagement",
@@ -56,7 +56,7 @@
                                                            RESTmethod:@"GET"
                                                              withName:@"CreateToken"],
                                    [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/gettokenbyguid"
-                                                             withData:[NSString stringWithFormat:@"?tokenguid=%@", [NavSolServicesManager instance].tokenGuid]
+                                                             withData:[NSString stringWithFormat:@"?tokenguid=%@", @"not-a-guid"]
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetTokenByGuid"],
@@ -84,7 +84,7 @@
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Security/Authentication
                                    [[NavSolService alloc] initWithUrl:@"/security/authentication.svc/signin"
-                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"exampleUser", @"examplePassword", nil]
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"jhardy", @"starwars", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"username", @"password", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
@@ -165,12 +165,12 @@
                                                                                                   forKeys:[NSArray arrayWithObjects:@"name", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"PUT"
-                                                             withName:@"GetAllTrips"],
+                                                             withName:@"AddTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/removetrip"
                                                              withData:@"?tripid=23422134"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
-                                                             withName:@"DeleteTrips"],
+                                                             withName:@"RemoveTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/renametrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"23423", @"newTripName", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"tripid", @"name", nil]]
@@ -199,17 +199,17 @@
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Member/MemberProperty
                                    [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/get"
-                                                             withData:@"?"
+                                                             withData:@"?propertyKey=name"
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"Get"],
                                    [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/set"
-                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"John Smith", nil] forKeys:[NSArray arrayWithObjects:@"Name", nil]]
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"name", @"JohnSmith", nil] forKeys:[NSArray arrayWithObjects:@"propertyKey", @"propertyValue", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"Set"],
                                    [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/remove"
-                                                             withData:@"?"
+                                                             withData:@"?propertyKey=name"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"Remove"],
@@ -238,12 +238,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[services objectForKey:[[services allKeys] objectAtIndex:section]] count];
+    return [[services objectForKey:[serviceNames objectAtIndex:section]] count];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *serviceName = [[services allKeys] objectAtIndex:section];
+    NSString *serviceName = [serviceNames objectAtIndex:section];
     return serviceName;
 }
 
@@ -258,7 +258,7 @@
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
 
-    NSArray *service = [services objectForKey:[[services allKeys] objectAtIndex:indexPath.section]];
+    NSArray *service = [services objectForKey:[serviceNames objectAtIndex:indexPath.section]];
     cell.textLabel.text = [[service objectAtIndex:indexPath.row] name];
     return cell;
 }
@@ -275,7 +275,7 @@
     if (!self.detailViewController) {
         self.detailViewController = [[NavSolDetailViewController alloc] initWithNibName:@"NavSolDetailViewController" bundle:nil];
     }
-    NSArray *service = [services objectForKey:[[services allKeys] objectAtIndex:indexPath.section]];
+    NSArray *service = [services objectForKey:[serviceNames objectAtIndex:indexPath.section]];
     NavSolService *operation = [service objectAtIndex:indexPath.row];
     
     [self.detailViewController setDetailItem: operation];
