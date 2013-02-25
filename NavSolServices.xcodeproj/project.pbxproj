@@ -105,8 +105,8 @@
 				1E3591B616D6BFF900F50541 /* Supporting Files */,
 			);
 			name = NavSolServices;
-			path = NavSolServices2;
-			sourceTree = "<group>";
+			path = "/Users/_ESDAdmin/Documents/NavSol Services/NavSolServices/NavSolServices";
+			sourceTree = "<absolute>";
 		};
 		1E3591B616D6BFF900F50541 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -295,8 +295,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices-Prefix.pch";
-				INFOPLIST_FILE = "NavSolServices2/NavSolServices-Info.plist";
+				GCC_PREFIX_HEADER = "NavSolServices/NavSolServices-Prefix.pch";
+				INFOPLIST_FILE = "NavSolServices/NavSolServices-Info.plist";
 				PRODUCT_NAME = NavSolServices;
 				WRAPPER_EXTENSION = app;
 			};
@@ -306,8 +306,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NavSolServices2/NavSolServices-Prefix.pch";
-				INFOPLIST_FILE = "NavSolServices2/NavSolServices-Info.plist";
+				GCC_PREFIX_HEADER = "NavSolServices/NavSolServices-Prefix.pch";
+				INFOPLIST_FILE = "NavSolServices/NavSolServices-Info.plist";
 				PRODUCT_NAME = NavSolServices;
 				WRAPPER_EXTENSION = app;
 			};
