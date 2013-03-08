@@ -49,33 +49,33 @@
     // a 2d array of all the operations, ordered by service 
     NSArray *serviceOperations = [[NSArray alloc] initWithObjects:
                                   [[NSArray alloc] initWithObjects: // Security/TokenManagement
-                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/createtoken"
+                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement/createtoken"
                                                              withData:[NSString stringWithFormat:@"?tenantGuid=%@&applicationGuid=%@",
                                                                        [NavSolServicesManager instance].tenantGuid, [NavSolServicesManager instance].applicationGuid ]
-                                                             isSecure:false
+                                                             isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"CreateToken"],
-                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement.svc/gettokenbyguid"
+                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement/gettokenbyguid"
                                                              withData:[NSString stringWithFormat:@"?tokenguid=%@", @"not-a-guid"]
-                                                             isSecure:false
+                                                             isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"GetTokenByGuid"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Security/Registration
-                                   [[NavSolService alloc] initWithUrl:@"/security/registration.svc/register"
+                                   [[NavSolService alloc] initWithUrl:@"/security/registration/register"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"exampleUser", @"examplePassword", @"example@sxsw.com", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"username", @"password", @"emailAddress", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"PUT"
                                                              withName:@"Register"],
-                                   [[NavSolService alloc] initWithUrl:@"/security/registration.svc/isvalidemailladdressusername"
+                                   [[NavSolService alloc] initWithUrl:@"/security/registration/isvalidemailaddressusername"
                                                              withData:[NSString stringWithFormat:@"?emailaddress=%@&username=%@",@"uniqueExample@sxsw.com",@"SXSW"]
-                                                             isSecure:false
+                                                             isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"IsValidEmailAddressUsername"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Security/PasswordManagement
-                                   [[NavSolService alloc] initWithUrl:@"/security/passwordmanagement.svc/changepassword"
+                                   [[NavSolService alloc] initWithUrl:@"/security/passwordmanagement/changepassword"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"examplePassword", @"newExamplePassword", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"password", @"newPassword", nil]]
                                                              isSecure:true
@@ -83,76 +83,76 @@
                                                              withName:@"ChangePassword"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Security/Authentication
-                                   [[NavSolService alloc] initWithUrl:@"/security/authentication.svc/signin"
+                                   [[NavSolService alloc] initWithUrl:@"/security/authentication/signin"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"exampleUser", @"examplePassword", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"username", @"password", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"SignIn"],
-                                   [[NavSolService alloc] initWithUrl:@"/security/authentication.svc/signout"
+                                   [[NavSolService alloc] initWithUrl:@"/security/authentication/signout"
                                                              withData:[[NSDictionary alloc] init]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"SignOut"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Search/Pois
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/"
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois/"
                                                              withData:@"?phrase=starbucks%20dallas,tx"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"Search"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/getallsearchcategories"
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois/getallsearchcategories"
                                                              withData:@""
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAllSearchCategories"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/getairport"
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois/getairport"
                                                              withData:@"?code=LAX"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAirport"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Search/Events
-                                   [[NavSolService alloc] initWithUrl:@"/search/events.svc/"
+                                   [[NavSolService alloc] initWithUrl:@"/search/events/"
                                                              withData:@"?categoryId=8427"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"Search"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/geteventparameters"
-                                                             withData:@"?startDate=2-30-2012&endDate=3-8-2012"
+                                   [[NavSolService alloc] initWithUrl:@"/search/events/geteventparameters"
+                                                             withData:@"?startDate=2012-03-12T12:00:00&endDate=2012-08-12T00:12:00"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetEventParameters"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois.svc/geteventdata"
+                                   [[NavSolService alloc] initWithUrl:@"/search/events/geteventdata"
                                                              withData:@"?eventId=13920"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetEventData"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Search/PopularLocations
-                                   [[NavSolService alloc] initWithUrl:@"/search/popularlocations.svc/"
+                                   [[NavSolService alloc] initWithUrl:@"/search/popularlocations/"
                                                              withData:@"?categoryId=5923"
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"Search"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/popularlocations.svc/getallpopularlocations"
+                                   [[NavSolService alloc] initWithUrl:@"/search/popularlocations/getallpopularlocations"
                                                              withData:@""
-                                                             isSecure:false
+                                                             isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAllPopularLocations"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // TripPlanning/CodeManagement
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement.svc/getalltrips"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement/getalltrips"
                                                              withData:@""
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAllTrips"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement.svc/getmembercode"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement/getmembercode"
                                                              withData:@""
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"GetMemberCode"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement.svc/savetrips"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement/savetrips"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"tripName", @"32424", @"pois", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"name", @"id", @"pois", nil]]
                                                              isSecure:true
@@ -160,24 +160,24 @@
                                                              withName:@"SaveTrips"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // TripPlanning/TripManagement
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/addtrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/addtrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"TestTrip", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"name", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"PUT"
                                                              withName:@"AddTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/removetrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/removetrip"
                                                              withData:@"?tripid=23422134"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"RemoveTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/renametrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/renametrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"23423", @"newTripName", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"tripid", @"name", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"RenameTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement.svc/setcurrentrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrentrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"45641", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"tripid", nil]]
                                                              isSecure:true
@@ -185,12 +185,12 @@
                                                              withName:@"SetCurrentTrip"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // TripPlanning/PoiManagement
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement.svc/removepoifromtrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/removepoifromtrip"
                                                              withData:@"?tripid=345322&poiid=23256771"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"RemovePoiFromTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement.svc/addpoitotrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/addpoitotrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"poiid", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"23534623", nil] ]
                                                              isSecure:true
@@ -198,22 +198,22 @@
                                                              withName:@"AddPoiToTrip"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Member/MemberProperty
-                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/get"
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty/get"
                                                              withData:@"?propertyKey=name"
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"Get"],
-                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/set"
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty/set"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"name", @"JohnSmith", nil] forKeys:[NSArray arrayWithObjects:@"propertyKey", @"propertyValue", nil]]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"Set"],
-                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/remove"
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty/remove"
                                                              withData:@"?propertyKey=name"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"Remove"],
-                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty.svc/getall"
+                                   [[NavSolService alloc] initWithUrl:@"/member/memberproperty/getall"
                                                              withData:@""
                                                              isSecure:true
                                                            RESTmethod:@"GET"

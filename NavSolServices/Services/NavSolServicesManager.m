@@ -21,8 +21,8 @@
     if (self)
     {
         baseServicesUrl = @"dev-services.navsol.net";
-        tenantGuid = @"9F4E1CAD-83F0-44F3-AF33-398F703768A6";
-        applicationGuid = @"141b2bdc-2840-4f66-a051-89bdb027958d";
+        tenantGuid = @"1B789923-C734-4E53-87AD-6ECB9AE37397";
+        applicationGuid = @"E5677C50-3DC2-45F3-9C83-9A99EB51A03C";
     }
 
     return self;
@@ -158,9 +158,16 @@ static NavSolServicesManager *myInstance;
         }
         else
         {
-            // otherwise grab the token guid data
-            NSLog(@"%@", [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"]);
-            tokenGuid = [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"];
+            if(! [[[json objectForKey:@"Data"] objectForKey:@"Result"] isEqualToNumber:[NSNumber numberWithInt:1]])
+            {
+                NSLog(@"Sign in failed with result = %@", [[json objectForKey:@"Data"] objectForKey:@"Result"]);
+            }
+            else
+            {
+                // otherwise grab the token guid data
+                NSLog(@"%@", [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"]);
+                tokenGuid = [[[json objectForKey:@"Data"] objectForKey:@"Token"] objectForKey:@"Guid"];
+            }
         }
     }
 
