@@ -177,7 +177,7 @@
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"RenameTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrentrip"
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrenttrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"45641", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"tripid", nil]]
                                                              isSecure:true
