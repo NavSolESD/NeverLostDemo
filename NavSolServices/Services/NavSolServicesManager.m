@@ -20,7 +20,7 @@
     self = [super init];
     if (self)
     {
-        baseServicesUrl = @"dev-services.navsol.net";
+        baseServicesUrl = @"stg-services.navsol.net";
         tenantGuid = @"1B789923-C734-4E53-87AD-6ECB9AE37397";
         applicationGuid = @"E5677C50-3DC2-45F3-9C83-9A99EB51A03C";
     }
@@ -158,7 +158,7 @@ static NavSolServicesManager *myInstance;
         }
         else
         {
-            if(! [[[json objectForKey:@"Data"] objectForKey:@"Result"] isEqualToNumber:[NSNumber numberWithInt:1]])
+            if(! [[[json objectForKey:@"Data"] objectForKey:@"Result"] isEqualToNumber:[NSNumber numberWithInt:5]])
             {
                 NSLog(@"Sign in failed with result = %@", [[json objectForKey:@"Data"] objectForKey:@"Result"]);
             }

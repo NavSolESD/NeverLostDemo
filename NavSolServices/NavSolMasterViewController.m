@@ -175,7 +175,7 @@
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"23423", @"newTripName", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"tripid", @"name", nil]]
                                                              isSecure:true
-                                                           RESTmethod:@"DELETE"
+                                                           RESTmethod:@"POST"
                                                              withName:@"RenameTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrentrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"45641", nil]
@@ -194,7 +194,7 @@
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"poiid", nil]
                                                                                                   forKeys:[NSArray arrayWithObjects:@"23534623", nil] ]
                                                              isSecure:true
-                                                           RESTmethod:@"DELETE"
+                                                           RESTmethod:@"PUT"
                                                              withName:@"AddPoiToTrip"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Member/MemberProperty
