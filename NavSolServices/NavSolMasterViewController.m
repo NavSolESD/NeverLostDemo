@@ -43,7 +43,7 @@
                              @"TripPlanning/CodeManagement",
                              @"TripPlanning/TripManagement",
                              @"TripPlanning/PoiManagement",
-                             @"Member/MemberProperty",
+ //                            @"Member/MemberProperty",
                              nil];
 
     // a 2d array of all the operations, ordered by service 
@@ -55,11 +55,11 @@
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"CreateToken"],
-                                   [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement/gettokenbyguid"
-                                                             withData:[NSString stringWithFormat:@"?tokenguid=%@", @"not-a-guid"]
-                                                             isSecure:true
-                                                           RESTmethod:@"GET"
-                                                             withName:@"GetTokenByGuid"],
+  //                                 [[NavSolService alloc] initWithUrl:@"/security/tokenmanagement/gettokenbyguid"
+  //                                                           withData:[NSString stringWithFormat:@"?tokenguid=%@", @"not-a-guid"]
+//                                                             isSecure:true
+  //                                                         RESTmethod:@"GET"
+    //                                                         withName:@"GetTokenByGuid"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Security/Registration
                                    [[NavSolService alloc] initWithUrl:@"/security/registration/register"
@@ -106,11 +106,11 @@
                                                              isSecure:false
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAllSearchCategories"],
-                                   [[NavSolService alloc] initWithUrl:@"/search/pois/getairport"
-                                                             withData:@"?code=LAX"
+                                   [[NavSolService alloc] initWithUrl:@"/search/pois/getallairportcodes"
+                                                             withData:@""
                                                              isSecure:false
                                                            RESTmethod:@"GET"
-                                                             withName:@"GetAirport"],
+                                                             withName:@"GetAllAirportCodes"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // Search/Events
                                    [[NavSolService alloc] initWithUrl:@"/search/events/"
@@ -153,8 +153,34 @@
                                                            RESTmethod:@"GET"
                                                              withName:@"GetMemberCode"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/codemanagement/savetrips"
-                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"tripName", @"32424", @"pois", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"name", @"id", @"pois", nil]]
+                                                             withData:[NSDictionary dictionaryWithObjects:
+                                                                            [NSArray arrayWithObjects:
+                                                                             [NSArray arrayWithObjects:
+                                                                                [NSDictionary dictionaryWithObjects:
+                                                                                    [NSArray arrayWithObjects:@"tripName", @"0", @"2", @"false",
+                                                                                     [NSArray arrayWithObjects:
+                                                                                            [NSDictionary dictionaryWithObjects:
+                                                                                                [NSArray arrayWithObjects:@"23234", @"", @"", @"0", @"2", nil]
+                                                                                                                        forKeys:
+                                                                                                [NSArray arrayWithObjects:@"Id", @"AlternateName", @"AlternatePhone", @"ListOrder", @"Status", nil]], nil], nil]
+                                                                                                            forKeys:
+                                                                                    [NSArray arrayWithObjects:@"Name", @"Id", @"Status", @"IsCurrent", @"Pois", nil]]
+                                                                             ,nil], nil]
+                                                                                                  forKeys:
+                                                                            [NSArray arrayWithObjects:@"trips", nil]
+                                                                       ]
+/*
+
+                                    [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
+                                                                        [NSDictionary dictionaryWithObjects:
+                                                                          [NSArray arrayWithObjects:@"tripName", @"0", @"{ poiId=23234; alternateName=\"\"; alternatePhone=\"\"; listOrder=0; status=3 }", @"3", nil]
+                                                                                                    forKeys:
+                                                                          [NSArray arrayWithObjects:@"name", @"id", @"pois", @"status", nil]]
+                                                                                                           , nil]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"trips", nil]
+
+                                                                       , nil]
+ */
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"SaveTrips"],
@@ -177,12 +203,17 @@
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"RenameTrip"],
-                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrenttrip"
-                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"45641", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripid", nil]]
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/gettrip"
+                                                             withData:@"?tripId=123086"
                                                              isSecure:true
-                                                           RESTmethod:@"POST"
-                                                             withName:@"SetCurrentTrip"],
+                                                           RESTmethod:@"GET"
+                                                             withName:@"GetTrip"],
+//                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/tripmanagement/setcurrenttrip"
+//                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"45641", nil]
+//                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripid", nil]]
+//                                                             isSecure:true
+//                                                           RESTmethod:@"POST"
+//                                                             withName:@"SetCurrentTrip"],
                                    nil],
                                   [[NSArray alloc] initWithObjects: // TripPlanning/PoiManagement
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/removepoifromtrip"
@@ -191,13 +222,26 @@
                                                            RESTmethod:@"DELETE"
                                                              withName:@"RemovePoiFromTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/addpoitotrip"
-                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"poiid", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"23534623", nil] ]
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"892398",@"236652", nil]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"poiid",@"tripid", nil] ]
                                                              isSecure:true
                                                            RESTmethod:@"PUT"
                                                              withName:@"AddPoiToTrip"],
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/updatepoi"
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"642432", @"43353", @"newName", @"222-333-4343", nil]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiId", @"alternateName", @"alternatePhoneNumber", nil] ]
+                                                             isSecure:true
+                                                           RESTmethod:@"POST"
+                                                             withName:@"UpdatePoi"],
+                                   [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/movepoi"
+                                                             withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"642432", @"43353", @"3", nil]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiId", @"newTripOrderLocation", nil] ]
+                                                             isSecure:true
+                                                           RESTmethod:@"POST"
+                                                             withName:@"MovePoi"],
+
                                    nil],
-                                  [[NSArray alloc] initWithObjects: // Member/MemberProperty
+/*                                  [[NSArray alloc] initWithObjects: // Member/MemberProperty
                                    [[NavSolService alloc] initWithUrl:@"/member/memberproperty/get"
                                                              withData:@"?propertyKey=name"
                                                              isSecure:true
@@ -218,7 +262,7 @@
                                                              isSecure:true
                                                            RESTmethod:@"GET"
                                                              withName:@"GetAll"],
-                                   nil],
+                                   nil],*/
                                   nil];
     services = [[NSDictionary alloc] initWithObjects:serviceOperations forKeys:serviceNames];
 }
