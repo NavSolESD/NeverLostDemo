@@ -20,8 +20,8 @@
     self = [super init];
     if (self)
     {
-        baseServicesUrl = @"localhost.navsol.net/services";
-        //baseServicesUrl = @"stg-services.navsol.net";
+        //baseServicesUrl = @"localhost.navsol.net/services";
+        baseServicesUrl = @"stg-services.navsol.net";
         tenantGuid = @"1B789923-C734-4E53-87AD-6ECB9AE37397";
         applicationGuid = @"E5677C50-3DC2-45F3-9C83-9A99EB51A03C";
     }

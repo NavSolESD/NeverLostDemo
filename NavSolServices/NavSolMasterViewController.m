@@ -217,25 +217,25 @@
                                    nil],
                                   [[NSArray alloc] initWithObjects: // TripPlanning/PoiManagement
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/removepoifromtrip"
-                                                             withData:@"?tripid=345322&poiid=23256771"
+                                                             withData:@"?tripid=345322&poicollectionid=23256771"
                                                              isSecure:true
                                                            RESTmethod:@"DELETE"
                                                              withName:@"RemovePoiFromTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/addpoitotrip"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"892398",@"236652", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"poiid",@"tripid", nil] ]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"poiCollectionid",@"tripid", nil] ]
                                                              isSecure:true
                                                            RESTmethod:@"PUT"
                                                              withName:@"AddPoiToTrip"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/updatepoi"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"642432", @"43353", @"newName", @"222-333-4343", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiId", @"alternateName", @"alternatePhoneNumber", nil] ]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiCollectionId", @"alternateName", @"alternatePhoneNumber", nil] ]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"UpdatePoi"],
                                    [[NavSolService alloc] initWithUrl:@"/tripplanning/poimanagement/movepoi"
                                                              withData:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"642432", @"43353", @"3", nil]
-                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiId", @"newTripOrderLocation", nil] ]
+                                                                                                  forKeys:[NSArray arrayWithObjects:@"tripId", @"poiCollectionId", @"newTripOrderLocation", nil] ]
                                                              isSecure:true
                                                            RESTmethod:@"POST"
                                                              withName:@"MovePoi"],
