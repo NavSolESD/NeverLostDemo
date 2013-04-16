@@ -1,4 +1,4 @@
-SXSWDemo
+NeverLost Demo
 ========
 
 This is a quick little iPhone app to show how to exercise all of the Navigation Solutions web services.
